@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function SignIn() {
   return (
     <div>
@@ -20,7 +22,13 @@ function SignIn() {
 
         <p className="cursor-pointer underline underline-offset-4 text-center text-xs">Forgot my password</p>
 
-        <div className="p-4 my-12 bg-white border border-black/50 text-center rounded-lg text-black/50">Sign up</div>
+        <Link to={'/sign-up'}>
+          <div
+            className="p-4 my-12 bg-white border border-black/50 text-center rounded-lg text-black/50"
+          >
+            Sign up
+          </div>
+        </Link>
       </div>
     </div>
   )

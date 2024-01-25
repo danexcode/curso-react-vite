@@ -6,6 +6,7 @@ import MyAccount from '../myAccount';
 import MyOrder from '../myOrder';
 import MyOrders from '../myOrders';
 import SignIn from '../signIn';
+import SignUp from '../signup';
 import NotFound from '../notFound';
 import Navbar from '../../components/navbar';
 import Layout from '../../components/layout';
@@ -27,6 +28,7 @@ const AppRoutes = () => {
     { path: '/my-orders/last', element: <MyOrder /> },
     { path: '/my-orders/:id', element: <MyOrder /> },
     { path: '/sign-in', element: <SignIn /> },
+    { path: '/sign-up', element: <SignUp /> },
     { path: '/*', element: <NotFound /> },
   ]);
 
