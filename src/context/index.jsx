@@ -77,6 +77,9 @@ export const ShoppingCartProvider = ({ children }) => {
     }
   }, [items, searchByTitle, searchByCategory]);
 
+  // Sign in state
+  const [isLogged, setIsLogged] = useState(false);
+
   return (
     <ShoppingCartContext.Provider value={{
       counter,
@@ -100,6 +103,8 @@ export const ShoppingCartProvider = ({ children }) => {
       filteredItems,
       searchByCategory,
       setSearchByCategory,
+      isLogged,
+      setIsLogged
     }}>
       { children }
     </ShoppingCartContext.Provider>

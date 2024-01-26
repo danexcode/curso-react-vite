@@ -8,6 +8,8 @@ import './styles.css';
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext);
 
+  const session = JSON.parse(localStorage.getItem('sign-in'));
+
   const handleDelete = (id) => {
     const filteredProducts = context.cartProducts.filter(item => item.id !== id);
     context.setCartProducts(filteredProducts);
@@ -16,6 +18,12 @@ const CheckoutSideMenu = () => {
 
   const handleCheckout = () => {
     if (context.cartProducts.length === 0) {
+      context.closeCheckoutSideMenu();
+      return;
+    }
+
+    if (session === false) {
+      context.closeCheckoutSideMenu();
       return;
     }
 
@@ -66,7 +74,7 @@ const CheckoutSideMenu = () => {
           <span className='font-light'>Total:</span>
           <span className='font-medium text-2xl'>${totalPrice(context.cartProducts)}</span>
         </p>
-        <Link to='/my-orders/last'>
+        <Link to={session ? '/my-orders/last' : '/sign-in'}>
           <button className='w-full bg-black py-3 text-white rounded-lg' onClick={() => handleCheckout()}>Checkout</button>
         </Link>
       </div>

@@ -3,11 +3,14 @@ import { useContext } from 'react'
 import Card from '../../components/card';
 import ProductDetail from '../../components/ProductDetail';
 import { ShoppingCartContext } from '../../context';
+import { checkLocalStorage } from '../../utils';
 
 import './styles.css';
 
 function Home() {
   const context = useContext(ShoppingCartContext);
+
+  checkLocalStorage();
 
   const renderView = () => {
     if (context.searchByTitle || context.searchByCategory) {

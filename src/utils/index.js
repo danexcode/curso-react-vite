@@ -23,3 +23,20 @@ export const addProductsToCart = (event, productInfo, context, closeDetail = tru
     context.closeProductDetail();
   }
 };
+
+export const checkLocalStorage = () => {
+  const signin = localStorage.getItem('sign-in');
+  if(signin === null) {
+    localStorage.setItem('sign-in', false);
+  }
+
+  const account = localStorage.getItem('account');
+  const user = {
+    name: '',
+    email: '',
+    password: '',
+  }
+  if(account === null) {
+    localStorage.setItem('account', JSON.stringify(user));
+  }
+}

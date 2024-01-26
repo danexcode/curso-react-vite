@@ -1,6 +1,61 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom"
+import { ShoppingCartContext } from "../../context";
 
 function SignIn() {
+  const context = useContext(ShoppingCartContext);
+
+  let user = localStorage.getItem('account');
+  user = JSON.parse(user);
+
+  const handleLogin = () => {
+    localStorage.setItem('sign-in', true);
+    context.setIsLogged(true);
+  }
+
+  const loginBtn = (user) => {
+    if (user.name) {
+      return (
+        <Link to={'/'}>
+          <div
+            className="p-4 my-4 cursor-pointer bg-black text-center rounded-lg text-white"
+            onClick={() => handleLogin()}
+          >Log In</div>
+        </Link>
+      );
+    } else {
+      return (
+        <div
+          className="p-4 my-12 bg-white border border-black/50 text-center rounded-lg text-black/50"
+        >
+          Log In
+        </div>
+      )
+    }
+  };
+
+  const signupBtn = (user) => {
+    if (!user.name) {
+      return (
+        <Link to={'/sign-up'}>
+          <div
+            className="p-4 my-4 cursor-pointer bg-black text-center rounded-lg text-white"
+            onClick={() => console.log("Sign Up")}
+          >Sign Up</div>
+        </Link>
+      );
+    } else {
+      return (
+        <div
+          className="p-4 my-12 bg-white border border-black/50 text-center rounded-lg text-black/50"
+        >
+          Sign Up
+        </div>
+      )
+    }
+  }
+
+
   return (
     <div>
       <div className="flex justify-center items-center w-96 mb-6 relative text-xl">
@@ -8,27 +63,21 @@ function SignIn() {
       </div>
       <div>
         <span>
-          <p className="flex items-center">
+          <div className="flex items-center">
             <p className="mr-1 font-light">Email: </p>
-            <p className="">danifanton@gmail.com</p>
-          </p>
-          <p className="flex items-center">
+            <p className="">{user.email}</p>
+          </div>
+          <div className="flex items-center">
             <p className="mr-1 font-light">Password: </p>
-            <p className="">1234</p>
-          </p>
+            <p className="">{user.password}</p>
+          </div>
         </span>
 
-        <div className="p-4 my-4 cursor-pointer bg-black text-center rounded-lg text-white">Log In</div>
+        {loginBtn(user)}
 
         <p className="cursor-pointer underline underline-offset-4 text-center text-xs">Forgot my password</p>
 
-        <Link to={'/sign-up'}>
-          <div
-            className="p-4 my-12 bg-white border border-black/50 text-center rounded-lg text-black/50"
-          >
-            Sign up
-          </div>
-        </Link>
+        {signupBtn(user)}
       </div>
     </div>
   )
